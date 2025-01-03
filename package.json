@@ -1,0 +1,32 @@
+{
+  "name": "axocore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "dev:example": "cd packages/example && npm run dev"
+  },
+  "packageManager": "npm@10.2.4",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@axocore/core": "file:./packages/core",
+    "@axocore/plugin-twitter": "file:./packages/plugin-twitter",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "nodemon": "^3.0.1",
+    "tsup": "^6.7.0",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  }
+}
