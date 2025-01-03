@@ -6,7 +6,7 @@ import fs from 'fs'
 import path from 'path'
 
 const scraper = new Scraper()
-const __dirname = path.resolve() + '/.cookies'
+const __dirname = path.resolve() + '/.runtime'
 const cookiefilename = 'twitter-cookies.json'
 async function init({
   username,
@@ -17,7 +17,6 @@ async function init({
   password: string
   email: string
 }) {
-  // check if .cookies folder exists
   if (!fs.existsSync(__dirname)) {
     fs.mkdirSync(__dirname)
   }

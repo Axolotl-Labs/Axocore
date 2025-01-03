@@ -36,6 +36,6 @@ yarn-error.log*
 coverage/
 
 # cookies
-.cookies/
+.runtime/
 
 package-lock.json

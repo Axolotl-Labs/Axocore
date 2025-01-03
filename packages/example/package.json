@@ -4,6 +4,7 @@
   "dependencies": {
     "@axocore/core": "^0.0.1",
     "@axocore/plugin-twitter": "^0.0.1",
+    "@axocore/client-cmd": "^0.0.1",
     "dotenv": "^16.4.7"
   },
   "scripts": {

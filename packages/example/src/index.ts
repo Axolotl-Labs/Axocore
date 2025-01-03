@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { agentWake, axologger, initPlugins } from '@axocore/core'
+import { agentWake } from '@axocore/core'
 
 const agent = {
   name: 'axobot',
@@ -9,7 +9,7 @@ const agent = {
   knowledge: [],
   style: [],
   plugins: ['@axocore/plugin-twitter'],
-  client: ['api'],
+  clients: ['cmd'],
 }
 
 agentWake(agent)

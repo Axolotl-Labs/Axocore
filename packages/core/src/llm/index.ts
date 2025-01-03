@@ -1,4 +1,9 @@
-const callAgent = async (message, sender = 'user') => {
+const callAgent = async (message: {
+  sender: string
+  message: string
+  isActionResponse: boolean
+  actionResponse: string
+}) => {
   const OPENROUTER_KEY = process.env.OPENROUTER_KEY
   const response = await fetch(
     'https://openrouter.ai/api/v1/chat/completions',
@@ -95,7 +100,7 @@ const callAgent = async (message, sender = 'user') => {
       "description": "Search Twitter with a query.",
       "actionParams": {
         "query": "The query you want to search, you can use all twitter search queries. ",
-        "count": "How many tweets you need (maximum is 50)."
+        "count": "How many tweets you need (minimum is 50 and maximum is 150)."
       }
     }
   }

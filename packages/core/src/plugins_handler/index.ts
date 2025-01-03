@@ -1,17 +1,18 @@
+import { sharedState } from './actions.store'
 import axologger from '../axologger'
 import { callAgent } from '../llm'
 
-let actions: { [key: string]: any } = {}
-
 const processAction = async (action: string, params: any) => {
+  const actions = sharedState.getActions()
   if (!actions[action]) {
     throw new Error(`Action ${action} not found`)
   }
 
   try {
     const res = await actions[action].handler(params)
+    let agnetResponse: any = {}
     if (res) {
-      callAgent({
+      agnetResponse = await callAgent({
         sender: 'internal',
         message: 'Action executed successfully',
         isActionResponse: true,
@@ -22,6 +23,7 @@ const processAction = async (action: string, params: any) => {
         }),
       })
     }
+    return agnetResponse.message
   } catch (error) {
     console.error(`Error executing action ${action}:`, error)
     throw error
@@ -52,13 +54,15 @@ const initPlugins = async (plugins: string[]) => {
           `Plugin ${plugin} loaded successfully`,
           JSON.stringify(initData)
         )
-        actions = { ...actions, ...module.default.actions }
+        if (module.default.actions) {
+          await sharedState.addActions(module.default.actions, plugin)
+        }
       }
     } catch (error) {
       console.error(`Failed to load plugin: ${plugin}`, error)
     }
   }
-  axologger.info('Actions :', JSON.stringify(Object.keys(actions)))
+  axologger.info('Actions:', JSON.stringify(sharedState.getActions()))
 }
 
-export { processAction, initPlugins }
+export { processAction, initPlugins, sharedState }
