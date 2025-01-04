@@ -39,3 +39,4 @@ coverage/
 .runtime/
 
 package-lock.json
+.pnpm-lock.yaml
