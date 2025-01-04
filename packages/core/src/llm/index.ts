@@ -23,8 +23,6 @@ const callAgent = async (message: {
             role: 'system',
             content: `You are a versatile AI agent capable of performing various tasks through defined actions. You analyze inputs and execute appropriate actions based on the available action set provided in your context. Your primary goal is to help users by performing tasks efficiently and providing clear analysis.
   
-  
-  
   Core Response Structure:
   
   For Action Execution:
@@ -72,7 +70,8 @@ const callAgent = async (message: {
      - Choose the most efficient action for the task.  
   
   2. Response Guidelines  
-     - Always maintain the JSON structure.  
+     - Always maintain the JSON structure.
+     - Message should be pure text not markdown  
      - Provide clear reasoning in messages.  
      - Be explicit about next steps.  
      - Include comprehensive analysis in the message field when processing data.  
