@@ -5,6 +5,18 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "utils#build": {
+      "outputs": ["dist/**"]
+    },
+    "core#build": {
+      "dependsOn": ["utils#build"]
+    },
+    "client-cmd#build": {
+      "dependsOn": ["utils#build"]
+    },
+    "plugin-twitter#build": {
+      "dependsOn": ["utils#build"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,
