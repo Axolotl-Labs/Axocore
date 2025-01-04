@@ -2,6 +2,7 @@
   "name": "@axocore/core",
   "version": "0.0.1",
   "description": "",
+  "private": true,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,10 +13,15 @@
   "author": "mehrabsha",
   "license": "ISC",
   "dependencies": {
-    "agent-twitter-client": "^0.0.18"
+    "agent-twitter-client": "^0.0.18",
+    "@axocore/client-cmd": "workspace:*",
+    "@axocore/plugin-twitter": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^6.0.0",
     "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "@axocore/utils": "workspace:*"
   }
 }

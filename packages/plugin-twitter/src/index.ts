@@ -1,6 +1,6 @@
 // import axolog from '../utils/axolog'
 
-import { axologger } from '@axocore/core'
+import { axologger } from '@axocore/utils'
 import { Scraper, SearchMode } from 'agent-twitter-client'
 import fs from 'fs'
 import path from 'path'

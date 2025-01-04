@@ -1,4 +1,4 @@
-import { sharedState } from '../plugins_handler'
+import { stateManager } from '@axocore/utils'
 
 const callAgent = async (message: {
   sender: string
@@ -93,7 +93,7 @@ const callAgent = async (message: {
   Example Usage with Current Actions:
   
   Available Actions:
-  ${sharedState.getActionsJSON()}
+  ${stateManager.getActionsJSON()}
   
   Example Response for User Request:
   {

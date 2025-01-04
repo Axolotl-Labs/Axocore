@@ -1,5 +1,5 @@
 import { processAction, initPlugins } from './plugins_handler'
-import axologger from './axologger'
+import { axologger } from '@axocore/utils'
 import { callAgent } from './llm'
 import { initClients } from './client-handler'
 

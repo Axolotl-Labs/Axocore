@@ -1,4 +1,6 @@
-import axologger from './axologger'
+import { axologger } from '@axocore/utils'
+import { callAgent } from './llm'
+import { processAction } from './plugins_handler'
 
 const initClients = async (agent: any) => {
   for (const client of agent.clients) {
@@ -11,6 +13,9 @@ const initClients = async (agent: any) => {
           case 'cmd':
             initData = {
               name: agent.name,
+              axologger,
+              processAction,
+              callAgent,
             }
             break
 

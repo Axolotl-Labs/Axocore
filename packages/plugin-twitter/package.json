@@ -12,10 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@axocore/core": "0.0.1",
     "agent-twitter-client": "^0.0.18"
   },
   "devDependencies": {
+    "@axocore/utils": "workspace:*",
     "tsup": "^6.0.0",
     "typescript": "^5.7.2"
   }

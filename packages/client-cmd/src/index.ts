@@ -1,6 +1,8 @@
-import { axologger, callAgent, processAction } from '@axocore/core'
 import readline from 'readline'
 
+let callAgent: any
+let axologger: any
+let processAction: any
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -37,8 +39,15 @@ rl.on('close', () => {
 })
 
 export default {
-  init: async (initData: { name: string }) => {
-    console.log('Welcome to the echo program!')
+  init: async (initData: {
+    name: string
+    axologger: any
+    callAgent: any
+    processAction: any
+  }) => {
+    callAgent = initData.callAgent
+    axologger = initData.axologger
+    processAction = initData.processAction
     promptUser(initData.name)
   },
 }

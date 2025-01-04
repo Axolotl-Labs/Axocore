@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@axocore/core": "0.0.1"
+    "@axocore/core": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^6.0.0",

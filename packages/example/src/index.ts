@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { agentWake } from '@axocore/core'
+import { stateManager } from '@axocore/utils'
 
 const agent = {
   name: 'axobot',
@@ -12,4 +13,5 @@ const agent = {
   clients: ['cmd'],
 }
 
+// stateManager.setState('aha', 'aha')
 agentWake(agent)

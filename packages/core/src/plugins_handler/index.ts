@@ -1,9 +1,9 @@
-import { sharedState } from './actions.store'
-import axologger from '../axologger'
+import { stateManager } from '@axocore/utils'
+import { axologger } from '@axocore/utils'
 import { callAgent } from '../llm'
 
 const processAction = async (action: string, params: any) => {
-  const actions = sharedState.getActions()
+  const actions = stateManager.getActions()
   if (!actions[action]) {
     throw new Error(`Action ${action} not found`)
   }
@@ -31,7 +31,7 @@ const processAction = async (action: string, params: any) => {
 }
 
 const initPlugins = async (plugins: string[]) => {
-  sharedState.addActions({
+  stateManager.addActions({
     NOTHING: {
       description: 'Do nothing, use it when no action is needed.',
       actionParams: {},
@@ -62,14 +62,14 @@ const initPlugins = async (plugins: string[]) => {
           JSON.stringify(initData)
         )
         if (module.default.actions) {
-          await sharedState.addActions(module.default.actions)
+          await stateManager.addActions(module.default.actions)
         }
       }
     } catch (error) {
       console.error(`Failed to load plugin: ${plugin}`, error)
     }
   }
-  axologger.info('Actions:', JSON.stringify(sharedState.getActions()))
+  axologger.info('Actions:', JSON.stringify(stateManager.getActions()))
 }
 
-export { processAction, initPlugins, sharedState }
+export { processAction, initPlugins }
