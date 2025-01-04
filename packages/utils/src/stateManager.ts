@@ -29,7 +29,6 @@ class stateManagerInstance {
       if (!currentActions[actionKey]) {
         // Add new action if it doesn't exist
         currentActions[actionKey] = action
-        console.log(`Action ${actionKey} added successfully.`)
       } else {
         // Log that the action already exists
         console.log(`Action ${actionKey} already exists, skipping.`)

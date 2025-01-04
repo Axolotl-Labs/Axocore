@@ -14,15 +14,21 @@ const agentWake = async (agent: {
   plugins?: string[]
 }) => {
   console.clear()
-  axologger.log('🌅 Agent is waking up... Initializing core systems.')
+  axologger.log(
+    '[@core]',
+    '🌅 Agent is waking up... Initializing core systems.'
+  )
 
   if (agent.plugins && agent.plugins.length > 0) {
-    axologger.log('🔮 Plugins detected. Preparing for magic...')
+    axologger.log('[@core]', '🔮 Plugins detected. Preparing for magic...')
     await initPlugins(['@axocore/plugin-twitter'])
   }
 
   if (agent.clients && agent.clients.length > 0) {
-    axologger.log('📞 Client detected. Preparing for user interaction...')
+    axologger.log(
+      '[@core]',
+      '📞 Client detected. Preparing for user interaction...'
+    )
     await initClients(agent)
   }
 }

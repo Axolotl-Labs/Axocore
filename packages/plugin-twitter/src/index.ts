@@ -72,7 +72,7 @@ async function loadCookies() {
     // Set the cookies for the current session
     await scraper.setCookies(cookieStrings)
 
-    axologger.info('Cookies loaded from file.')
+    axologger.info('[@plugin-twitter]', 'Cookies loaded from file.')
   } catch (error) {
     axologger.error('Error loading cookies:', JSON.stringify(error))
   }
@@ -89,7 +89,10 @@ async function ensureAuthenticated({
 }) {
   if (fs.existsSync(path.resolve(__dirname, cookiefilename))) {
     await loadCookies()
-    axologger.info('You are already logged in. No need to log in again.')
+    axologger.info(
+      '[@plugin-twitter]',
+      'You are already logged in. No need to log in again.'
+    )
   } else {
     await loginAndSaveCookies({
       username,

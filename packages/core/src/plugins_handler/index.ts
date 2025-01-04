@@ -58,6 +58,7 @@ const initPlugins = async (plugins: string[]) => {
         }
         await module.default.init(initData)
         axologger.success(
+          '[@core]',
           `Plugin ${plugin} loaded successfully`,
           JSON.stringify(initData)
         )
@@ -69,7 +70,11 @@ const initPlugins = async (plugins: string[]) => {
       console.error(`Failed to load plugin: ${plugin}`, error)
     }
   }
-  axologger.info('Actions:', JSON.stringify(stateManager.getActions()))
+  axologger.info(
+    '[@core]',
+    'Actions:',
+    JSON.stringify(Object.keys(stateManager.getActions()))
+  )
 }
 
 export { processAction, initPlugins }

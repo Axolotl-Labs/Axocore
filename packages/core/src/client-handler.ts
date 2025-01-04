@@ -5,7 +5,7 @@ import { processAction } from './plugins_handler'
 const initClients = async (agent: any) => {
   for (const client of agent.clients) {
     try {
-      axologger.info('Loading client: ', client)
+      axologger.info('[@core]', 'Loading client: ', client)
       const module = await import('@axocore/client-' + client)
       if (module.default && typeof module.default === 'object') {
         let initData = {}
