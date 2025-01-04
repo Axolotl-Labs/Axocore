@@ -17,11 +17,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@axocore/core": "file:./packages/core",
-    "@axocore/plugin-twitter": "file:./packages/plugin-twitter",
-    "dotenv": "^16.4.7"
-  },
   "devDependencies": {
     "@types/node": "^22.10.5",
     "nodemon": "^3.0.1",

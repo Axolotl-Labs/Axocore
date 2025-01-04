@@ -1,3 +1,5 @@
+import { sharedState } from '../plugins_handler'
+
 const callAgent = async (message: {
   sender: string
   message: string
@@ -91,19 +93,7 @@ const callAgent = async (message: {
   Example Usage with Current Actions:
   
   Available Actions:
-  {
-    "NOTHING": {
-      "description": "Do nothing; use it when no action is needed.",
-      "actionParams": {}
-    },
-    "SEARCH_TWITTER": {
-      "description": "Search Twitter with a query.",
-      "actionParams": {
-        "query": "The query you want to search, you can use all twitter search queries. ",
-        "count": "How many tweets you need (minimum is 50 and maximum is 150)."
-      }
-    }
-  }
+  ${sharedState.getActionsJSON()}
   
   Example Response for User Request:
   {

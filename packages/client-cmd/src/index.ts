@@ -1,4 +1,4 @@
-import { axologger, callAgent, processAction, sharedState } from '@axocore/core'
+import { axologger, callAgent, processAction } from '@axocore/core'
 import readline from 'readline'
 
 const rl = readline.createInterface({

@@ -31,6 +31,13 @@ const processAction = async (action: string, params: any) => {
 }
 
 const initPlugins = async (plugins: string[]) => {
+  sharedState.addActions({
+    NOTHING: {
+      description: 'Do nothing, use it when no action is needed.',
+      actionParams: {},
+    },
+  })
+
   for (const plugin of plugins) {
     try {
       const module = await import(plugin)
@@ -55,7 +62,7 @@ const initPlugins = async (plugins: string[]) => {
           JSON.stringify(initData)
         )
         if (module.default.actions) {
-          await sharedState.addActions(module.default.actions, plugin)
+          await sharedState.addActions(module.default.actions)
         }
       }
     } catch (error) {
