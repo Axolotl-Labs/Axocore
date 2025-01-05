@@ -16,6 +16,21 @@ const initClients = async (agent: any) => {
               processAction,
             }
             break
+          case 'telegram':
+            if (!process.env.TELGRAM_BOT_TOKEN) {
+              throw new Error('TELGRAM_BOT_TOKEN not found in .env')
+            }
+            if (!process.env.TELEGRAM_ADMIN_ID) {
+              throw new Error('TELEGRAM_ADMIN_ID not found in .env')
+            }
+            initData = {
+              name: agent.name,
+              axologger,
+              processAction,
+              token: process.env.TELGRAM_BOT_TOKEN,
+              adminId: parseInt(process.env.TELEGRAM_ADMIN_ID),
+            }
+            break
 
           default:
             break

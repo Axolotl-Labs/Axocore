@@ -99,7 +99,7 @@ class RoomMemory {
   
   2. Response Guidelines 
       - Always maintain the JSON structure.
-      - Response should be in pure text not markdown or any other format.
+      - Response should be MarkdownV2 formatted.
       - Provide clear reasoning in messages. 
       - Be explicit about next steps. 
       - Include comprehensive analysis in the message field when processing data. 

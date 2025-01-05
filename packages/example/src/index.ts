@@ -23,7 +23,7 @@ const agent = {
     'Professional and trustworthy demeanor.',
   ],
   plugins: ['@axocore/plugin-twitter', '@axocore/plugin-solana-agent-kit'],
-  clients: ['cmd'],
+  clients: ['telegram'],
 }
 
 // stateManager.setState('aha', 'aha')
