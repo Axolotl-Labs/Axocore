@@ -22,7 +22,7 @@ const agentWake = async (agent: {
 
   if (agent.plugins && agent.plugins.length > 0) {
     axologger.info('[@core]', '🔮 Plugins detected. Preparing for magic...')
-    await initPlugins(['@axocore/plugin-twitter'])
+    await initPlugins(agent.plugins)
   }
 
   if (agent.clients && agent.clients.length > 0) {

@@ -22,7 +22,7 @@ const agent = {
     'Focus on risk management and diversification.',
     'Professional and trustworthy demeanor.',
   ],
-  plugins: ['@axocore/plugin-twitter'],
+  plugins: ['@axocore/plugin-twitter', '@axocore/plugin-solana-agent-kit'],
   clients: ['cmd'],
 }
 

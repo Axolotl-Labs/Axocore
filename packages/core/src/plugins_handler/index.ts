@@ -54,10 +54,31 @@ const initPlugins = async (plugins: string[]) => {
         let initData = {}
         switch (plugin) {
           case '@axocore/plugin-twitter':
+            if (!process.env.TWITTER_USERNAME) {
+              throw new Error('TWITTER_USERNAME not found')
+            }
+            if (!process.env.TWITTER_PASSWORD) {
+              throw new Error('TWITTER_PASSWORD not found')
+            }
+            if (!process.env.TWITTER_EMAIL) {
+              throw new Error('TWITTER_EMAIL not found')
+            }
             initData = {
               username: process.env.TWITTER_USERNAME,
               password: process.env.TWITTER_PASSWORD,
               email: process.env.TWITTER_EMAIL,
+            }
+            break
+          case '@axocore/plugin-solana-agent-kit':
+            if (!process.env.SOLANA_WALLET_PRIVATE_KEY) {
+              throw new Error('SOLANA_WALLET_PRIVATE_KEY not found')
+            }
+            if (!process.env.SOLANA_RPC_URL) {
+              throw new Error('SOLANA_RPC_URL not found')
+            }
+            initData = {
+              walletPrivateKey: process.env.SOLANA_WALLET_PRIVATE_KEY,
+              rpcUrl: process.env.SOLANA_RPC_URL,
             }
             break
 

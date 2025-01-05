@@ -1,8 +1,7 @@
 {
-  "name": "@axocore/core",
+  "name": "@axocore/plugin-solana-agent-kit",
   "version": "0.0.1",
   "description": "",
-  "private": true,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,20 +9,16 @@
     "build": "tsup --format esm --dts",
     "dev": "tsup --format esm --dts --watch"
   },
-  "author": "mehrabsha",
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@axocore/client-cmd": "workspace:*",
-    "@axocore/plugin-twitter": "workspace:*",
-    "@axocore/plugin-solana-agent-kit": "workspace:*",
-    "agent-twitter-client": "^0.0.18",
-    "openai": "^4.77.3"
-  },
   "devDependencies": {
     "tsup": "^6.0.0",
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
     "@axocore/utils": "workspace:*"
+  },
+  "dependencies": {
+    "solana-agent-kit": "^1.3.6"
   }
 }

@@ -95,10 +95,11 @@ class RoomMemory {
       - Never assume availability of actions. 
       - Validate all action parameters. 
       - Choose the most efficient action for the task. 
+      - If there are multiple valid actions, choose based on context and user needs or ask for clarification.
   
   2. Response Guidelines 
       - Always maintain the JSON structure.
-      - Message should be pure text not markdown 
+      - Response should be in pure text not markdown or any other format.
       - Provide clear reasoning in messages. 
       - Be explicit about next steps. 
       - Include comprehensive analysis in the message field when processing data. 
