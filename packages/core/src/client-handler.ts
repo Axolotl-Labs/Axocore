@@ -1,5 +1,4 @@
 import { axologger } from '@axocore/utils'
-import { callAgent } from './llm'
 import { processAction } from './plugins_handler'
 
 const initClients = async (agent: any) => {
@@ -15,7 +14,6 @@ const initClients = async (agent: any) => {
               name: agent.name,
               axologger,
               processAction,
-              callAgent,
             }
             break
 

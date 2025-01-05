@@ -13,9 +13,10 @@
   "author": "mehrabsha",
   "license": "ISC",
   "dependencies": {
-    "agent-twitter-client": "^0.0.18",
     "@axocore/client-cmd": "workspace:*",
-    "@axocore/plugin-twitter": "workspace:*"
+    "@axocore/plugin-twitter": "workspace:*",
+    "agent-twitter-client": "^0.0.18",
+    "openai": "^4.77.3"
   },
   "devDependencies": {
     "tsup": "^6.0.0",

@@ -1,8 +1,16 @@
-import { stateManager } from '@axocore/utils'
-import { axologger } from '@axocore/utils'
-import { callAgent } from '../llm'
+import {
+  axologger,
+  RoomMemory,
+  sendNewMessage,
+  stateManager,
+} from '@axocore/utils'
 
-const processAction = async (action: string, params: any) => {
+const processAction = async (
+  memory: RoomMemory,
+  roomId: string,
+  action: string,
+  params: any
+) => {
   const actions = stateManager.getActions()
   if (!actions[action]) {
     throw new Error(`Action ${action} not found`)
@@ -12,7 +20,7 @@ const processAction = async (action: string, params: any) => {
     const res = await actions[action].handler(params)
     let agnetResponse: any = {}
     if (res) {
-      agnetResponse = await callAgent({
+      agnetResponse = await sendNewMessage(memory, roomId, {
         sender: 'internal',
         message: 'Action executed successfully',
         isActionResponse: true,

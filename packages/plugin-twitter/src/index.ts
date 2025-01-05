@@ -102,13 +102,15 @@ async function ensureAuthenticated({
   }
 }
 
-const fetchtweets = async (query: any, count: any) => {
-  axologger.info(`Fetching tweets for query: ${query} with count: ${count}`)
+const fetchtweets = async (query: any, count: any, searchMode: any) => {
+  axologger.info(
+    `Fetching tweets for query: ${query} with count: ${count} and search mode: ${searchMode}`
+  )
   let tweets = []
   for await (const tweet of scraper.searchTweets(
-    `${query} -filter:media -filter:retweets -filter:replies`,
+    `${query} -filter:replies -filter:retweets -filter:links -filter:media`,
     count,
-    SearchMode.Top
+    searchMode === 'Top' ? SearchMode.Top : SearchMode.Latest
   )) {
     tweets.push(tweet)
   }
@@ -128,6 +130,26 @@ const fetchtweets = async (query: any, count: any) => {
 
   return JSON.stringify(filtered)
 }
+const fetchProfile = async (name: any, count: any) => {
+  axologger.info(`Fetching profiles for name: ${name} with count: ${count} `)
+  const profileResults = await scraper.fetchSearchProfiles(name, count)
+  const filtered = profileResults.profiles.map((profile) => ({
+    biography: profile.biography,
+    followersCount: profile.followersCount,
+    followingCount: profile.followingCount,
+    isPrivate: profile.isPrivate,
+    likesCount: profile.likesCount,
+    listedCount: profile.listedCount,
+    name: profile.name,
+    tweetsCount: profile.tweetsCount,
+    username: profile.username,
+    isBlueVerified: profile.isBlueVerified,
+    joined: profile.joined,
+    website: profile.website,
+  }))
+
+  return JSON.stringify(filtered)
+}
 
 export default {
   init: async ({ username, password, email }: any) => {
@@ -140,11 +162,26 @@ export default {
         query:
           'The query you want to search, you can use all twitter search queries (-filter and etc). ',
         count: 'How many tweets do you need (maximum is 50).',
+        searchMode: 'Search mode only these values (Users, Top, Latest)',
       },
       handler: async (params: any) => {
         let res = null
         if (params.query && params.count) {
-          res = await fetchtweets(params.query, params.count)
+          res = await fetchtweets(params.query, params.count, params.searchMode)
+        }
+        return res
+      },
+    },
+    SEARCH_TWITTER_PROFILE: {
+      description: 'Search Twitter profiles with a name.',
+      actionParams: {
+        name: 'The name of the profile you want to search.',
+        count: 'How many profiles do you need (maximum is 50).',
+      },
+      handler: async (params: any) => {
+        let res = null
+        if (params.name && params.count) {
+          res = await fetchProfile(params.name, params.count)
         }
         return res
       },

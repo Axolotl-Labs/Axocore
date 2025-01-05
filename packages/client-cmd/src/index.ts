@@ -1,6 +1,8 @@
 import readline from 'readline'
+import { RoomMemory, sendNewMessage } from '@axocore/utils'
 
-let callAgent: any
+let memory: any
+let roomId: string
 let axologger: any
 let processAction: any
 const rl = readline.createInterface({
@@ -16,17 +18,22 @@ async function promptUser(name: string) {
     process.stdout.moveCursor(0, 2)
 
     // call agent
-    const response = await callAgent({
+    const response = (await sendNewMessage(memory, roomId, {
       sender: 'user',
       message: userInput,
       isActionResponse: false,
       actionResponse: '',
-    })
+    })) as any
     axologger.info(name + ' :', response.message)
     const action = response.action
     if (action !== 'NOTHING') {
       axologger.warn('Action :', action)
-      const actionRes = await processAction(action, response.actionParams)
+      const actionRes = await processAction(
+        memory,
+        roomId,
+        action,
+        response.actionParams
+      )
       axologger.info('Agent :', actionRes)
     }
 
@@ -42,12 +49,12 @@ export default {
   init: async (initData: {
     name: string
     axologger: any
-    callAgent: any
     processAction: any
   }) => {
-    callAgent = initData.callAgent
     axologger = initData.axologger
     processAction = initData.processAction
+    memory = new RoomMemory()
+    roomId = memory.createRoom()
     promptUser(initData.name)
   },
 }

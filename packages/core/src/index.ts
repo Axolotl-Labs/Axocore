@@ -1,6 +1,5 @@
 import { processAction, initPlugins } from './plugins_handler'
-import { axologger } from '@axocore/utils'
-import { callAgent } from './llm'
+import { axologger, initLLM } from '@axocore/utils'
 import { initClients } from './client-handler'
 
 const agentWake = async (agent: {
@@ -14,18 +13,20 @@ const agentWake = async (agent: {
   plugins?: string[]
 }) => {
   console.clear()
-  axologger.log(
+  axologger.info(
     '[@core]',
     '🌅 Agent is waking up... Initializing core systems.'
   )
+  axologger.info('[@core]', '🧠 Preparing for knowledge transfer...')
+  initLLM(agent)
 
   if (agent.plugins && agent.plugins.length > 0) {
-    axologger.log('[@core]', '🔮 Plugins detected. Preparing for magic...')
+    axologger.info('[@core]', '🔮 Plugins detected. Preparing for magic...')
     await initPlugins(['@axocore/plugin-twitter'])
   }
 
   if (agent.clients && agent.clients.length > 0) {
-    axologger.log(
+    axologger.info(
       '[@core]',
       '📞 Client detected. Preparing for user interaction...'
     )
@@ -33,4 +34,4 @@ const agentWake = async (agent: {
   }
 }
 
-export { axologger, agentWake, callAgent, processAction }
+export { axologger, agentWake, processAction }
