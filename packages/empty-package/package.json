@@ -11,11 +11,11 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@axocore/core": "workspace:*"
-  },
   "devDependencies": {
     "tsup": "^6.0.0",
     "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "@axocore/utils": "workspace:*"
   }
 }

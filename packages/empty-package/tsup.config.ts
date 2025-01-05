@@ -6,5 +6,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   format: ['esm'],
-  external: ['@axocore/core', 'dotenv', 'fs', 'path'],
+  external: ['dotenv', 'fs', 'path'],
 })
