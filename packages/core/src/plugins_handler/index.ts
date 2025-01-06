@@ -9,12 +9,14 @@ const processAction = async (
   memory: RoomMemory,
   roomId: string,
   action: string,
-  params: any
+  params: any,
+  callback?: any
 ) => {
   const actions = stateManager.getActions()
   if (!actions[action]) {
     throw new Error(`Action ${action} not found`)
   }
+  axologger.warn('Action :', action)
 
   try {
     const res = await actions[action].handler(params)
@@ -31,7 +33,17 @@ const processAction = async (
         }),
       })
     }
-    return agnetResponse.message
+    callback && callback(agnetResponse.message)
+    if (agnetResponse.action !== 'NOTHING') {
+      axologger.log('RES', JSON.stringify(agnetResponse))
+      await processAction(
+        memory,
+        roomId,
+        agnetResponse.action,
+        agnetResponse.actionParams,
+        callback
+      )
+    }
   } catch (error) {
     console.error(`Error executing action ${action}:`, error)
     throw error

@@ -133,6 +133,7 @@ const fetchtweets = async (query: any, count: any, searchMode: any) => {
 const fetchProfile = async (name: any, count: any) => {
   axologger.info(`Fetching profiles for name: ${name} with count: ${count} `)
   const profileResults = await scraper.fetchSearchProfiles(name, count)
+
   const filtered = profileResults.profiles.map((profile) => ({
     biography: profile.biography,
     followersCount: profile.followersCount,
@@ -146,6 +147,25 @@ const fetchProfile = async (name: any, count: any) => {
     isBlueVerified: profile.isBlueVerified,
     joined: profile.joined,
     website: profile.website,
+    canDm: profile.canDm,
+  }))
+
+  return JSON.stringify(filtered)
+}
+const fetchProfileTweets = async (username: any, count: any) => {
+  axologger.info(`Fetching tweets for ${username} with count: ${count}`)
+  let tweets = []
+  for await (const tweet of scraper.getTweets(username, count)) {
+    tweets.push(tweet)
+  }
+
+  const filtered = tweets.map((tweet) => ({
+    conversationId: tweet.conversationId,
+    text: tweet.text,
+    likes: tweet.likes,
+    replies: tweet.replies,
+    views: tweet.views,
+    retweets: tweet.retweets,
   }))
 
   return JSON.stringify(filtered)
@@ -182,6 +202,20 @@ export default {
         let res = null
         if (params.name && params.count) {
           res = await fetchProfile(params.name, params.count)
+        }
+        return res
+      },
+    },
+    SEARCH_TWITTER_PROFILE_TWEETS: {
+      description: 'Search Twitter profile tweets with a username.',
+      actionParams: {
+        username: 'The username of the profile you want to search.',
+        count: 'How many tweets do you need (maximum is 50).',
+      },
+      handler: async (params: any) => {
+        let res = null
+        if (params.username && params.count) {
+          res = await fetchProfileTweets(params.username, params.count)
         }
         return res
       },

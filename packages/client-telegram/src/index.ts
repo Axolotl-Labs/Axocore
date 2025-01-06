@@ -48,14 +48,13 @@ const init = async (name: string, token: string, adminId: number) => {
     bot.sendMessage(chatId, response.message)
     const action = response.action
     if (action !== 'NOTHING') {
-      axologger.warn('Action :', action)
-      const actionRes = await processAction(
+      await processAction(
         memory,
         roomId,
         action,
-        response.actionParams
+        response.actionParams,
+        (message: string) => bot.sendMessage(chatId, message)
       )
-      bot.sendMessage(chatId, actionRes)
     }
   })
 }
