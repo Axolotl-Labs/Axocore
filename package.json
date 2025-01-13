@@ -1,7 +1,7 @@
 {
   "name": "axocore",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Open-source multi-agent infrastructure with a modular plugin system.",
   "main": "dist/index.js",
   "type": "module",
   "private": true,
@@ -12,8 +12,8 @@
   },
   "packageManager": "pnpm@9.12.3",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "mehrabsha",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.10.5",
     "nodemon": "^3.0.1",
