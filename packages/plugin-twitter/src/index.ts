@@ -170,6 +170,20 @@ const fetchProfileTweets = async (username: any, count: any) => {
 
   return JSON.stringify(filtered)
 }
+const fetchListTweets = async (listId: any, count: any) => {
+  const listTweets = await scraper.fetchListTweets(listId, count)
+  console.log(
+    listTweets.tweets.map((tweet) => ({
+      name: tweet.name,
+      text: tweet.text,
+      thread: tweet.thread,
+      conversationId: tweet.conversationId,
+      isreply: tweet.isReply,
+    }))
+  )
+  console.log(listTweets.tweets.length)
+  return JSON.stringify(listTweets)
+}
 
 export default {
   init: async ({ username, password, email }: any) => {
@@ -216,6 +230,20 @@ export default {
         let res = null
         if (params.username && params.count) {
           res = await fetchProfileTweets(params.username, params.count)
+        }
+        return res
+      },
+    },
+    GET_LIST_TWEETS: {
+      description: 'Get list tweets with a list id.',
+      actionParams: {
+        listId: 'The list id you want to search.',
+        count: 'How many tweets do you need (maximum is 50).',
+      },
+      handler: async (params: any) => {
+        let res = null
+        if (params.listId && params.count) {
+          res = await fetchListTweets(params.listId, params.count)
         }
         return res
       },

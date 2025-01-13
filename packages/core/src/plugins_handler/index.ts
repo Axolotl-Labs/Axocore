@@ -27,7 +27,7 @@ const processAction = async (
         message: 'Action executed successfully',
         isActionResponse: true,
         actionResponse: JSON.stringify({
-          action,
+          action: action,
           actionParams: params,
           response: res,
         }),

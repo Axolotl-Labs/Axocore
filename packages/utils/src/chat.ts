@@ -16,6 +16,7 @@ interface ChatMessage {
 let name = ''
 let bio = ''
 let knowledge = ''
+let capabilities = ''
 let style = ''
 let model = ''
 
@@ -37,6 +38,7 @@ class RoomMemory {
 
 Bio: ${bio}
 Knowledge: ${knowledge}
+Capabilities: ${capabilities}
 Style: ${style} (This describes how you should act and answer. Be sure to embody these traits in your responses.)
 
 Examples of how to interpret Style:
@@ -90,14 +92,23 @@ Key Operating Principles:
     - Validate all action parameters. 
     - Choose the most efficient action for the task. 
     - If there are multiple valid actions, choose based on context and user needs or ask for clarification.
+    - If an action requires additional information, request it from the user before calling the action.
+    - You can not ask for user input while action is not NOTHING.
 
 2. Response Guidelines 
     - Always maintain the JSON structure.
-    - Response should be plain text (no formatting like Markdown, HTML, etc.).
     - Provide clear reasoning in messages. 
     - Be explicit about next steps. 
     - Include comprehensive analysis in the message field when processing data. 
     - ALL outputs for the user, including drafts, notes, or supplementary information like a "Tweet Draft," must be contained entirely in the "message" field. NO information should appear outside of this field.
+    - Include all user output in message field
+    - Use proper JSON escaping
+    - Ensure all fields are properly quoted
+    - If action is NOTHING, message should contain all output and you can not send another message
+    - Message in response ALWAYS should be in pure text format without any markdown or any other formatting but with good readability and structure
+    - Do not include any formatting in the message field like '**', etc.
+    
+
 
 3. Error Handling 
     - If the requested action isn’t available, use NOTHING and explain. 
@@ -217,15 +228,15 @@ async function sendNewMessage(
       },
       body: JSON.stringify({
         model: model,
-        provider: {
-          order: ['DeepSeek', 'Fireworks'],
-        },
         messages: messages,
+        max_tokens: 1000,
       }),
     }
   )
   const res = await completion.json()
-  const aiResponse = res.choices[0].message.content || '{}'
+  const aiResponse =
+    res.choices[0].message.content.replace('```json', '').replace('```', '') ||
+    '{}'
 
   memory.addMessage(roomId, {
     role: 'assistant',
@@ -242,11 +253,13 @@ const initLLM = (agent: {
   knowledge: string[]
   style: string[]
   model: string
+  capabilities: string[]
 }) => {
   name = agent.name
   bio = agent.bio.join(', ')
   knowledge = agent.knowledge.join(', ')
   style = agent.style.join(', ')
+  capabilities = agent.capabilities.join(', ')
   model = agent.model
 }
 

@@ -8,6 +8,7 @@ const agentWake = async (agent: {
   model: string
   bio: any[]
   knowledge: any[]
+  capabilities: any[]
   style: any[]
   clients: string[]
   plugins?: string[]
