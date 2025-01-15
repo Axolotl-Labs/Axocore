@@ -17,6 +17,7 @@
     "@axocore/client-telegram": "workspace:*",
     "@axocore/plugin-twitter": "workspace:*",
     "@axocore/plugin-solana-agent-kit": "workspace:*",
+    "@axocore/plugin-web-search": "workspace:*",
     "agent-twitter-client": "^0.0.18",
     "openai": "^4.77.3"
   },

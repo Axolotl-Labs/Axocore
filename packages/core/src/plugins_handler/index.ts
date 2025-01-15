@@ -93,6 +93,14 @@ const initPlugins = async (plugins: string[]) => {
               rpcUrl: process.env.SOLANA_RPC_URL,
             }
             break
+          case '@axocore/plugin-web-search':
+            if (!process.env.TAVILY_API_KEY) {
+              throw new Error('TAVILY_API_KEY not found')
+            }
+            initData = {
+              apiKey: process.env.TAVILY_API_KEY,
+            }
+            break
 
           default:
             break
