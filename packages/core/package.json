@@ -15,9 +15,12 @@
   "dependencies": {
     "@axocore/client-cmd": "workspace:*",
     "@axocore/client-telegram": "workspace:*",
-    "@axocore/plugin-twitter": "workspace:*",
     "@axocore/plugin-solana-agent-kit": "workspace:*",
+    "@axocore/plugin-twitter": "workspace:*",
     "@axocore/plugin-web-search": "workspace:*",
+    "@pinecone-database/pinecone": "^4.1.0",
+    "@tensorflow-models/universal-sentence-encoder": "^1.3.3",
+    "@tensorflow/tfjs": "^4.22.0",
     "agent-twitter-client": "^0.0.18",
     "openai": "^4.77.3"
   },

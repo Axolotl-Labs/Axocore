@@ -42,10 +42,6 @@ class RoomMemory {
     
     Core Structure:
     {
-        "metadata": {
-            "version": "1.0",
-            "sessionId": "string"
-        },
         "thought": "string", // All user-facing output here
         "plan": {
             "steps": ["string"],
@@ -79,15 +75,6 @@ class RoomMemory {
                 "message": "string",
                 "retryable": boolean
             }
-        },
-        "conversation": {
-            "history": [
-                {
-                    "sender": "user|agent",
-                    "message": "string"
-                }
-            ],
-            "context": {}
         }
     }
     
@@ -107,6 +94,9 @@ class RoomMemory {
     - Clear structure with paragraphs
     - Max 2000 chars per response
     - Include error details when relevant
+    - If action is "NOTHING", set the thought field completely because it's the end
+    - Keep responses in "thought" and don't change the response structure
+    
     
     3. Error Handling
     - Retry retryable errors up to max
@@ -130,13 +120,9 @@ class RoomMemory {
     Example:
     
     User: "Search Twitter for crypto trends"
-    
     Response:
     {
-        "metadata": {
-            "version": "1.0",
-            "sessionId": "abc123"
-        },
+        
         "thought": "Analyzing crypto trends. Will search for high-engagement discussions about major cryptocurrencies.",
         "plan": {
             "steps": ["Search recent tweets", "Analyze sentiment", "Summarize trends"],
@@ -155,6 +141,20 @@ class RoomMemory {
         },
         "finish": false
     }
+
+    Internal: "Action executed successfully, tweets : {TWEETS}"
+    Response:
+    {
+        
+        "thought": "I discovered these trends: {TWEETS ANALYSIS REPORT}",
+        "plan": {},
+        "subGoal": {},
+        "action": {
+            "name": "NOTHING",
+            "params": {}
+        },
+        "finish": true
+    }
     
     Available Actions: ${stateManager.getActionsJSON()}
     
@@ -163,6 +163,7 @@ class RoomMemory {
     - Maintain conversation context
     - Use clear error messages
     - Track plan progress
+    - If action is "NOTHING", set the thought field completely because it's the end
     - Keep responses concise`,
     })
     return roomId

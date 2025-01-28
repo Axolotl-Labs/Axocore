@@ -174,14 +174,16 @@ const fetchListTweets = async (listId: any, count: any) => {
   const listTweets = await scraper.fetchListTweets(listId, count)
   console.log(
     listTweets.tweets.map((tweet) => ({
+      id: tweet.id,
       name: tweet.name,
+      username: tweet.username,
       text: tweet.text,
       thread: tweet.thread,
       conversationId: tweet.conversationId,
       isreply: tweet.isReply,
+      timeParsed: tweet.timeParsed,
     }))
   )
-  console.log(listTweets.tweets.length)
   return JSON.stringify(listTweets)
 }
 
